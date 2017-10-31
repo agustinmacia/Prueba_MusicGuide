@@ -1,0 +1,98 @@
+import TP1MusicGuide.*
+	describe "Joaquin" {
+		var cisne = new Canciones(312,"Hoy el viento se abrio quedo vacio el aire una vez mas y el manantial broto y nadie esta aqui y puedo ver que solo estallan las hojas al brillar")
+		var laFamilia = new Canciones(264,"Quiero brindar por mi gente sencilla, por el amor brindo por la familia")
+		var presentacionLunaPark = new Presentacion(new Date(20,4,2017),lunaPark,#{joaquin,luisAlberto,lucia})
+		var presentacionTrastienda = new Presentacion (new Date(15,11,2017),trastienda,#{joaquin,luisAlberto,lucia})
+		
+		test "Joaquín canta en el grupo Pimpinela. Queremos conocer su habilidad"{
+			joaquin.tocaEnGrupo()
+			assert.equals(25,joaquin.habilidadDeJoaquin())
+		}
+		test "Joaquín canta en el grupo Pimpinela, y decide lanzar su carrera solista (deja el grupo). Queremos conocer su habilidad"{
+			joaquin.dejarGrupo(pimpinella)
+			assert.equals(20,joaquin.habilidadDeJoaquin())
+		}
+		test "Lucía canta en el grupo Pimpinela. Queremos saber su habilidad."{
+			lucia.tocaEnGrupo()
+			assert.equals(50,lucia.habilidadDeLucia())	
+		}
+		test "Lucía canta en el grupo Pimpinela, y lanza su carrera solista (deja el grupo). Queremos conocer su habilidad."{
+			lucia.dejarGrupo(pimpinella)
+			assert.equals(70,lucia.habilidadDeLucia())
+		}
+		test "Luis Alberto toca con la Fender. Queremos saber su habilidad."{
+			assert.equals(80,luisAlberto.habilidad())
+		}
+		test "Luis Alberto toca ahora con la Gibson sana. Queremos saber su habilidad"{
+			luisAlberto.guitarra(gibson)
+			assert.equals(100,luisAlberto.habilidad())
+		}
+		test "Alguien trata mal a la Gibson y ahora no está sana. Luis Alberto toca con la Gibson. Queremos saber su habilidad."{
+			gibson.estaRota()
+			luisAlberto.guitarra(gibson)
+			assert.equals(40,luisAlberto.habilidad())
+			}
+		test "Queremos saber si Joaquín interpreta bien la canción “La Familia”"{
+			assert.notThat(joaquin.interpretaBien(laFamilia))
+		}
+		test "Queremos saber si Joaquín interpreta bien la canción “Cisne”"{
+			assert.that(joaquin.interpretaBien(cisne))
+		}
+		test "Queremos saber si Lucía interpreta bien la canción “La Familia”"{
+			assert.that(lucia.interpretaBien(laFamilia))
+		}
+		test "Queremos saber si Lucía interpreta bien la canción “Cisne"{
+			assert.notThat(lucia.interpretaBien(cisne))
+		}
+		test "Queremos saber si Luis Alberto interpreta bien la canción “La Familia”"{
+			assert.that(luisAlberto.interpretaBien(laFamilia))
+		}
+		test "Queremos saber si Luis Alberto interpreta bien la canción “Cisne”"{
+			assert.that(luisAlberto.interpretaBien(cisne))
+		}
+		test "Queremos saber cuánto cobra Joaquín por la presentación del Luna Park"{
+			assert.equals(50, joaquin.costoPresentacion(presentacionLunaPark))
+		}
+		test "Modificar la presentación de la Trastienda para que solo actúe Joaquín."{
+			presentacionTrastienda.artistas().remove(lucia)
+			presentacionTrastienda.artistas().remove(luisAlberto)
+			assert.equals(100, joaquin.costoPresentacion(presentacionTrastienda))
+		}
+		
+//		test "Queremos saber la capacidad de La Trastienda para el 05 de agosto del 2017"{
+//			
+//			
+//		}
+//		
+//		test "Queremos saber la capacidad de La Trastienda para el 08 de agosto del 2017"{
+//		
+//			
+//		}
+		
+//		test "Queremos saber cuánto cobra Lucía por la presentación del Luna Park"{
+//			lucia.lugarConcurrido(presentacionLunaPark)
+//			assert.equals(500, lucia.costoPresentacion())
+//		}
+////		
+		test "Queremos saber cuánto cobra Lucía por la presentación de la Trastienda"{
+			lucia.lugarConcurrido(presentacionTrastienda)
+			assert.equals(400, lucia.costoPresentacion())
+		}
+		
+		test "Queremos saber cuánto cobra Luis Alberto por la presentación del Luna Park"{
+			assert.equals(1000, luisAlberto.costoPresentacion(presentacionLunaPark))
+		}
+		test "Queremos saber cuánto cobra Luis Alberto por la presentación de la Trastienda"{
+			assert.equals(1200, luisAlberto.costoPresentacion(presentacionTrastienda))
+		}
+		test "Queremos saber el costo de la presentación del Luna Park"{
+			assert.equals(1550,presentacionLunaPark.costoTotal())
+		}
+
+//		test"Queremos saber el costo de la presentación de la Trastienda el 15/11/2017"{
+//
+//		}
+		
+		
+		}
